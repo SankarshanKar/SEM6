@@ -1,0 +1,20 @@
+Q1. Write a program in python to enter a three digit number from the keyboard and check whether it is palindrome number or not without using any loop.
+Q2. Write a program in python to enter five integers from the keyboard and find out the smallest one using multiple if statements.
+Q3. Write a program in python to enter the marks of a student with if else then calculate the total marks and percentage, also assign the grade as per the following criteria:
+-if percentage >= 90 and <= 100 then grade = 'O'
+-if percentage >= 80 and < 90 then grade = 'E'
+Q4. Write a program in python as above using switch case statements.
+Q5. Write a  program in python to enter a number from the keyboard and find out reverse of it.
+Q6. Write a program in python to check the given number is perfect number or not.
+Q7. Write a program in python to check whether given number is abstract number or not.
+Q8. Write a program in python to generate fibonacci series upto n terms.
+Q9. Write a program in python to generate the following pattern:
+1
+1 2
+1 2 3
+1 2 3 4
+Q10. Write a program in python to generate the following pattern:
+1
+2 3
+4 5 6
+7 8 9 10

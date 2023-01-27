@@ -1,0 +1,7 @@
+1. WAP in python to display your roll number, name and section using multiple print statement.
+2. WAP in python to assign 2 numeric value to 2 references and perform all the airthmetic operations.
+3. WAP in python to assign 2 integer values to 2 references and check if both objects are same or not.
+4. WAP in python to display all the created references .(dir)
+5. WAP in python to initialize a 3 digit integer number and perform the addition of first and last digit. (using only operator)
+6. WAP in python to initialize a 3 digit number and display reverse of it. (using only operators)
+7. WAP in python to delete a particular reference/variable. (del)
