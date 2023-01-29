@@ -49,12 +49,10 @@ void calculateTime(vector<Process>& tasks) {
 
 void display(vector<Process> arr) {
     sort(arr.begin(), arr.end(), comparator2);
+    int totalWT = 0, totalTAT = 0;
     cout << "PNo.\tAT\tBT\tCT\tWT\tTAT\n";
     for (auto i : arr) {
         cout << i.processNo << "\t" << i.arrivalTime << "\t" << i.burstTime << "\t" << i.completionTime << "\t" << i.waitingTime << "\t" << i.turnAroundTime << endl;
-    }
-    int totalWT = 0, totalTAT = 0;
-    for (auto i : arr) {
         totalWT += i.waitingTime;
         totalTAT += i.turnAroundTime;
     }
