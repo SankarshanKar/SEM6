@@ -1,96 +1,76 @@
-
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-void findWaitingTime(int processes[], int n, int bt[], int wt[], int quantum)
-{
+int timeQuantum = 2;
 
-    int rem_bt[n];
-    for (int i = 0; i < n; i++)
-        rem_bt[i] = bt[i];
+struct Process {
+    int processNo;
+    int burstTime;
+    int arrivalTime;
+    int waitingTime;
+    int turnAroundTime;
+    int completionTime;
+};
 
+void inputData(vector<Process>& tasks) {
+    vector<int> bt = {5, 4, 2, 1};
+    vector<int> at = {0, 1, 2, 4};
+    for (int i = 0; i < bt.size(); i++) {
+        Process task;
+        task.processNo = i + 1;
+        task.arrivalTime = at[i];
+        task.burstTime = bt[i];
+        tasks.push_back(task);
+    }
+}
+
+void calculateWaiting(vector<Process> tasks) {
+    vector<int> remainingBurstTime;
+    for (int i = 0; i < tasks.size(); i++) {
+        remainingBurstTime.push_back(tasks[i].burstTime);
+    }
     int t = 0;
 
-    while (1)
-    {
+    while (1) {
         bool done = true;
 
-        for (int i = 0; i < n; i++)
-        {
-
-            if (rem_bt[i] > 0)
-            {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (remainingBurstTime[i] > 0) {
                 done = false;
-
-                if (rem_bt[i] > quantum)
-                {
-
-                    t += quantum;
-
-                    rem_bt[i] -= quantum;
+                if (remainingBurstTime[i] > timeQuantum) {
+                    t += timeQuantum;
+                    remainingBurstTime[i] -= timeQuantum;
                 }
-
-                else
-                {
-
-                    t = t + rem_bt[i];
-
-                    wt[i] = t - bt[i];
-
-                    rem_bt[i] = 0;
+                else {
+                    t += remainingBurstTime[i];
+                    tasks[i].waitingTime = t - tasks[i].burstTime;
+                    remainingBurstTime[i] = 0;
                 }
             }
         }
-
-        if (done == true)
+        if (done == true) {
             break;
+        }
     }
 }
 
-void findTurnAroundTime(int processes[], int n, int bt[], int wt[], int tat[])
-{
-
-    for (int i = 0; i < n; i++)
-        tat[i] = bt[i] + wt[i];
-}
-
-void findavgTime(int processes[], int n, int bt[],
-                 int quantum)
-{
-    int wt[n], tat[n], total_wt = 0, total_tat = 0;
-
-    findWaitingTime(processes, n, bt, wt, quantum);
-
-    findTurnAroundTime(processes, n, bt, wt, tat);
-
-    cout << "PN\t "
-         << " \tBT "
-         << " WT "
-         << " \tTAT\n";
-
-    for (int i = 0; i < n; i++)
-    {
-        total_wt = total_wt + wt[i];
-        total_tat = total_tat + tat[i];
-        cout << " " << i + 1 << "\t\t" << bt[i] << "\t "
-             << wt[i] << "\t\t " << tat[i] << endl;
+void calculateTurnAroundTime(vector<Process> tasks) {
+    for (int i = 0; i < tasks.size(); i++) {
+        tasks[i].turnAroundTime = tasks[i].burstTime + tasks[i].waitingTime;
     }
-
-    cout << "Average waiting time = "
-         << (float)total_wt / (float)n;
-    cout << "\nAverage turn around time = "
-         << (float)total_tat / (float)n;
 }
 
-int main()
-{
+void display(vector<Process> arr) {
+    for (auto i : arr) {
+        cout << i.processNo << " " << i.arrivalTime << " " << i.burstTime << " " << i.waitingTime << " " << i.turnAroundTime << endl;
+    }
+}
 
-    int processes[] = {1, 2, 3};
-    int n = sizeof processes / sizeof processes[0];
+int main() {
+    vector<Process> tasks;
 
-    int burst_time[] = {10, 5, 8};
+    inputData(tasks);
+    display(tasks);
 
-    int quantum = 2;
-    findavgTime(processes, n, burst_time, quantum);
     return 0;
 }
