@@ -6,7 +6,7 @@ Q3. Write a program in python to enter the marks of a student with if else then 
 Q4. Write a program in python as above using switch case statements.
 Q5. Write a  program in python to enter a number from the keyboard and find out reverse of it.
 Q6. Write a program in python to check the given number is perfect number or not.
-Q7. Write a program in python to check whether given number is abstract number or not.
+Q7. Write a program in python to check whether given number is armstrong number or not.
 Q8. Write a program in python to generate fibonacci series upto n terms.
 Q9. Write a program in python to generate the following pattern:
 1
