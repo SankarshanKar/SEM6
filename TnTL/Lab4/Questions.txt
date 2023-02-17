@@ -1,0 +1,15 @@
+Q1. Write a python program to get the second smallest and the second largest element present in a list.
+Q2. Write a python program to remove all duplicates from a list.
+Q3. Write a python program to find out the index of an element in a specified list.
+Q4. Write a python program to append a list to another list.
+Q5. Write a python program to exchange the nth element with (n + 1) element in the list.
+Q6. Write a python program to remove the kth element and print updated list.
+Q7. Write a python program to print a specified list after removing second and fifth number index element.
+Q8. Write a python program to convert a list to a tuple.
+Q9. Write a python program to find out the product of all the elements present in a tuple.
+Q10. Write a python program to convert a tuple of string values to integer values.
+
+Practice:
+
+Q11. Write a python program to check the frequency of a specfic element within a tuple.
+Q12. Write a python program to create a tuple with nested tuple and list and access and print the elements of nested tuple and list.
