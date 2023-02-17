@@ -1,77 +1,100 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Process {
-    int processNo;
-    int burstTime;
-    int arrivalTime;
-    int waitingTime;
-    int turnAroundTime;
-    int completionTime;
+struct Process
+{
+    int pid;
+    int bt;
+    int art;
 };
-
-bool comparatorAT(Process a, Process b) {
-    if (a.arrivalTime == b.arrivalTime) {
-        return (a.processNo < b.processNo);
-    }
-    return (a.arrivalTime < b.arrivalTime);
+void findTurnAroundTime(Process proc[], int n, int wt[], int tat[])
+{
+    for (int i = 0; i < n; i++)
+        tat[i] = proc[i].bt + wt[i];
 }
 
-bool comparatorPNo(Process a, Process b) {
-    return (a.processNo < b.processNo);
-}
-
-void inputData(vector<Process>& arr) {
-    // vector<int> at = {2, 5, 1, 0, 4};
-    // vector<int> bt = {6, 2, 8, 3, 4};
-    vector<int> at = {1, 2, 3, 4, 5};
-    vector<int> bt = {7, 5, 1, 2, 8};
-    for (int i = 0; i < 5; i++) {
-        Process task;
-        task.processNo = i + 1;
-        task.arrivalTime = at[i];
-        task.burstTime = bt[i];
-        arr.push_back(task);
-    }
-}
-
-void shortestJobFirst(vector<Process>& arr) {
-    sort(arr.begin(), arr.end(), comparatorAT);
-    int time = 0;
-    time += arr[0].arrivalTime;
-
-    for (int i = 0; i < arr.size(); i++) {
-        time += arr[i].burstTime;
-        arr[i].completionTime = time;
-        arr[i].turnAroundTime = arr[i].completionTime - arr[i].arrivalTime;
-        arr[i].waitingTime = arr[i].turnAroundTime - arr[i].burstTime;
-
-        if (time < arr[i + 1].arrivalTime) {
-            int t = arr[i + 1].arrivalTime - time;
-            time = time + t;
+void findWaitingTime(Process proc[], int n, int wt[])
+{
+    int rt[n];
+    for (int i = 0; i < n; i++)
+        rt[i] = proc[i].bt;
+    int complete = 0, t = 0, minm = INT_MAX;
+    int shortest = 0, finish_time;
+    bool check = false;
+    while (complete != n)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if ((proc[j].art <= t) && (rt[j] < minm) && rt[j] > 0)
+            {
+                minm = rt[j];
+                shortest = j;
+                check = true;
+            }
         }
+        if (check == false)
+        {
+            t++;
+            continue;
+        }
+
+        rt[shortest]--;
+        minm = rt[shortest];
+        if (minm == 0)
+            minm = INT_MAX;
+
+        if (rt[shortest] == 0)
+        {
+            complete++;
+            check = false;
+            finish_time = t + 1;
+
+            wt[shortest] = finish_time - proc[shortest].bt - proc[shortest].art;
+            if (wt[shortest] < 0)
+                wt[shortest] = 0;
+        }
+
+        t++;
     }
 }
 
-void display(vector<Process> arr) {
-    sort(arr.begin(), arr.end(), comparatorPNo);
-    cout << "PNo.\tAT\tBT\tCT\tWT\tTAT\n";
-    int totalTAT = 0, totalWT = 0;
-    for (auto i : arr) {
-        cout << i.processNo << "\t" << i.arrivalTime << "\t" << i.burstTime << "\t" << i.completionTime << "\t" << i.waitingTime << "\t" << i.turnAroundTime << endl;
-        totalTAT += i.turnAroundTime;
-        totalWT += i.waitingTime;
+void findavgTime(Process proc[], int n)
+{
+    int wt[n], tat[n], total_wt = 0,
+                       total_tat = 0;
+
+    findWaitingTime(proc, n, wt);
+
+    findTurnAroundTime(proc, n, wt, tat);
+    cout << "Processes "
+         << " Burst time "
+         << " Waiting time "
+         << " Turn around time\n";
+    for (int i = 0; i < n; i++)
+    {
+        total_wt = total_wt + wt[i];
+        total_tat = total_tat + tat[i];
+        cout << " " << proc[i].pid << "\t\t" << proc[i].bt << "\t\t " << wt[i] << "\t\t " << tat[i] << endl;
     }
-    cout << "Average Turn Around Time: " << totalTAT / arr.size() << endl;
-    cout << "Average Wainting Time: " << totalWT / arr.size() << endl;
+    cout << "\nAverage waiting time = " << (float)total_wt / (float)n;
+    cout << "\nAverage turn around time = " << (float)total_tat / (float)n << endl;
 }
 
-int main() {
-    vector<Process> arr;
-
-    inputData(arr);
-    shortestJobFirst(arr);
-    display(arr);
-
+int main()
+{
+    Process proc[] = {{1, 5, 1}, {2, 3, 1}, {3, 6, 2}, {4, 5, 3}};
+    int n = sizeof(proc) / sizeof(proc[0]);
+    findavgTime(proc, n);
     return 0;
 }
+
+/*
+Processes  Burst time  Waiting time  Turn around time
+ 1              5                3               8
+ 2              3                0               3
+ 3              6                12              18
+ 4              5                6               11
+
+Average waiting time = 5.25
+Average turn around time = 10
+*/
