@@ -1,0 +1,9 @@
+Q1. Write a python program to check if two given sets have any common element or not.
+Q2. Write a python program to perform union, intersection and set difference on two sets.
+Q3. Write a python program to check an entered value present in the set or not.
+Q4. Write a python program that finds all pairs of elements in a list whose sum is equals to a given value.
+Q5. Write a python program to multipy all the elements present in a dictionary.
+Q6. Write a python program to merge two dictionaries.
+Q7. Write a python program to sort a given dictionary by its key.
+Q8. Write a python program to print all distict values present in a dictionary.
+Q9. Write a python program to convert a dictionary into a list of lists.
