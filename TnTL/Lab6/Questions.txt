@@ -1,0 +1,5 @@
+Q1. Write a program in python to calculate the simple interest of the given principal, time and rate of interest, where the function takes the default value for the rate of interest.
+Q2. Write a program in python to pass a list to  a function and the function adds 3 to each and every element of the list and then print the updated list in the function.
+Q3. Write a program in python to pass a number to a function then print 1, 2, 3, ..., n using recursion.
+Q4. Write a program in python to generate a multiplication table of any number using lambda function.
+Q5. Write a program in python to define a function with an argument which can take n number of key word arguments.
